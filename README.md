@@ -3,7 +3,9 @@
 > Run config.py
 
 > Start slurm with systemd:
+
 $ sudo systemctl start slurmctld
+
 $ sudo systemctl start slurmd
 
 > Set machine as idle - to start queuing up jobs
