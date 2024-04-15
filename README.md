@@ -1,5 +1,13 @@
 # SlurmConfig
 
+SlurmConfig is a comprehensive tool for configuring and managing SLURM (Simple Linux Utility for Resource Management) clusters. SLURM is a highly scalable and robust workload manager for Linux clusters, used widely in high-performance computing (HPC) environments. SlurmConfig provides users with a simplified interface to set up, configure, and manage SLURM clusters effortlessly.
+
+With SlurmConfig, users can easily generate SLURM configuration files (`slurm.conf`), automate the installation of SLURM components (`slurmctld` and `slurmd`), and learn to manage SLURM jobs. With SlurmConfig we get:
+
+- Automated installation of SLURM components using package managers (`apt-get` or `yum`) based on the Linux distribution.
+- Configuration file generation with user-friendly prompts to set SLURM parameters such as cluster name, node settings, scheduling policies, and more.
+- Step-by-step guide and documentation for submitting jobs.
+ 
 ## Run Configuration
 
 To configure Slurm, run `config.py`.
