@@ -43,7 +43,7 @@ The script changes directory to where your Python script is located using cd.
 Finally, the Python script (train_model.py) is executed using the python command.
 
 ## 3. Submit the job
-Ok so the work is done, everything is ready, but how do we submit it for it to work?
+Ok so the setup is done, everything is ready, but how do we submit it for it to be worked upon?
 
 Follow example_slurm_script.sh to create a script
 
