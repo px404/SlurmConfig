@@ -1,4 +1,3 @@
-import platform
 import subprocess
 
 def get_linux_distribution():
@@ -26,9 +25,9 @@ def install_slurm():
     else:
         raise RuntimeError(f"Unsupported distribution: {dist}")
 
-    # Update package repo and install Slurm
-    subprocess.run([package_manager, 'update', '-y'], check=True)
-    subprocess.run([package_manager, 'install', 'slurmd', 'slurmctld', '-y'], check=True)
+    # Update package repo and install Slurm with sudo permissions
+    subprocess.run(['sudo', package_manager, 'update', '-y'], check=True)
+    subprocess.run(['sudo', package_manager, 'install', 'slurmd', 'slurmctld', '-y'], check=True)
 
 if __name__ == "__main__":
     install_slurm()
