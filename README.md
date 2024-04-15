@@ -1,7 +1,5 @@
 # SlurmConfig
 
-> Run install_slurm.py with sudo permissions: $ sudo python3 install_slurm.py
-
 > Run config.py
 
 > Start slurm with systemd:
