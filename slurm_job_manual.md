@@ -68,8 +68,38 @@ You’ll see your job identified by this number.
 
 Your job will run in the current directory from where you submit the `sbatch` command (although you can direct it elsewhere in the script, using a `cd` command). After submitting a SLURM job script, upon completion one should get an output file `slurm-«jobid».out` (this filename can be changed via a `#SBATCH –o` option).
 
-[See `slurm_job_manual.md` for detailed explanation on submitting/performing tasks.]
-
 If you have any issues you can debug it by looking in the logs in `/var/log/slurm/slurmd.log` and `/var/log/slurm/slurmctld.log` (The path is relative).
 
 If you need to make changes to your config edit the `slurm.conf` and restart `slurmctld` and `slurmd` via systemd for the changes.
+
+### Useful SLURM Commands for Monitoring Load:
+
+1. **squeue**:
+   - Command: `squeue`
+   - Description: Lists both active and pending jobs submitted to SLURM.
+   - Usage: Provides various information about the jobs, including expected start time if the job is pending.
+   - Additional: Use `squeue -u «username»` to limit output to your jobs only.
+
+2. **sinfo**:
+   - Command: `sinfo`
+   - Description: Shows the status of all nodes in the cluster.
+   - Usage: Helpful for understanding the availability of cluster resources.
+
+3. **scontrol show node**:
+   - Command: `scontrol show node «nodename»`
+   - Description: Gives a full status report for a specific node.
+   - Usage: Use the node name as an argument. Omitting the nodename provides info for ALL nodes.
+
+4. **scontrol show job**:
+   - Command: `scontrol show job «jobid»`
+   - Description: Provides a complete summary of settings for a running or pending job.
+   - Additional: Use `seff «jobid»` once the job is complete to get information about CPU and memory use, and efficiency.
+
+5. **scancel**:
+   - Command: `scancel «jobid»`
+   - Description: Immediately kills the job with the specified job ID.
+   - Usage: Useful for terminating jobs submitted in error or jobs not running as desired.
+
+**Note:** 
+- All nodes in the cluster, including file servers and the login node, have SLURM installed and will respond to the above commands and job submissions.
+- It's recommended to submit SLURM jobs from `svante-login`. [Note: As of 2023, SLURM capabilities may not be active on all file servers]
