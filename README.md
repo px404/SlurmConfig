@@ -19,6 +19,8 @@ PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 
 LocalQ*      up   infinite      1   idle localhost
 
+
+
 You now have a queue(or “partition” in slurm lingo) called LocalQ that you can now submit your work to.
 
 ## Submit Slurm Job
