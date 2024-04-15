@@ -10,6 +10,7 @@ $ sudo systemctl start slurmd
 
 > Set machine as idle - to start queuing up jobs
 $ sudo scontrol update nodename=localhost state=idle
+
 $ sinfo
 
 If successful you see:
