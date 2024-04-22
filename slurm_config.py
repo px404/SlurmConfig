@@ -1,6 +1,12 @@
 import os
+import shutil
 import subprocess
 from install_slurm import install_slurm
+
+def create_directory_if_not_exists(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+        print(f"Directory '{directory}' created.")
 
 def find_slurm_directory():
     # Search for directories containing "slurm" in their name within /etc
@@ -56,6 +62,14 @@ def generate_slurm_conf():
     default = input("Enter Default (Whether the partition is the default partition, e.g., 'YES' or 'NO'): ") or 'YES'
     max_time = input("Enter MaxTime (Maximum time limit for jobs in the partition, e.g., 'INFINITE'): ") or 'INFINITE'
     
+    # Create directories if they don't exist
+    create_directory_if_not_exists(os.path.dirname(slurmctld_pid_file))
+    create_directory_if_not_exists(os.path.dirname(slurmd_pid_file))
+    create_directory_if_not_exists(slurmd_spool_dir)
+    create_directory_if_not_exists(state_save_location)
+    create_directory_if_not_exists(os.path.dirname(slurmctld_log_file))
+    create_directory_if_not_exists(os.path.dirname(slurmd_log_file))
+    
     # Write configuration to slurm.conf file
     with open('slurm.conf', 'w') as f:
         f.write(f'''\
@@ -102,11 +116,11 @@ PartitionName={partition_name} Nodes={nodes} Default={default} MaxTime={max_time
     
     if destination_path:
         # Move slurm.conf to the found directory
-        os.rename('slurm.conf', os.path.join(destination_path, 'slurm.conf'))
+        shutil.move('slurm.conf', destination_path)
         print(f"slurm.conf has been moved to {destination_path}")
         
         # Change permissions of the slurm.conf file
-        subprocess.run(['sudo', 'chmod', '755', os.path.join(destination_path, 'slurm.conf')], check=True)
+        os.chmod(os.path.join(destination_path, 'slurm.conf'), 0o755)
         print("Permissions for slurm.conf have been changed.")
     else:
         print("No slurm configuration directory found in /etc. Manual intervention may be required.")
